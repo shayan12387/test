@@ -1,24 +1,16 @@
 const express = require("express");
-const multer = require("multer");
+const path = require("path");
 
 const app = express();
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
-    }
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "up.html"));
 });
 
-const upload = multer({ storage });
+const PORT = process.env.PORT || 3000;
 
-app.post("/upload", upload.single("file"), (req, res) => {
-    console.log(req.file);
-    res.send("File uploaded!");
-});
-
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Running on ${PORT}`);
 });

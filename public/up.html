@@ -64,17 +64,9 @@
     </body>
 
     <script>
-                const path = require("path");
+    document.getElementById("uploadBtn").addEventListener("click", async () => {
 
-        app.get("/", (req, res) => {
-            res.sendFile(path.join(__dirname, "up.html"));
-        });
-
-                const express = require("express");
-        const app = express();
-
-        app.use(express.static("public"));
-        const file = document.getElementById("fileInput").files[0];
+    const file = document.getElementById("fileInput").files[0];
 
     const formData = new FormData();
     formData.append("file", file);
@@ -85,8 +77,9 @@
     });
 
     const result = await response.text();
-    console.log(result); 
-
+    console.log(result);
+});
+</script>
       
 </script>
     </script>
