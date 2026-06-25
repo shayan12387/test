@@ -2,12 +2,87 @@
 <html>
     <head>
         <title>upload website</title>
+        <style>
+            body {
+                background-color: rgb(0, 0, 44);
+            }
+            .button {
+  /* Layout & Sizing */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  
+  /* Typography */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: #ffffff;
+  text-decoration: none;
+  
+  /* Background & Borders */
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: none;
+  border-radius: 8px;
+  
+  /* Interactions & Aesthetics */
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2), 0 2px 4px -1px rgba(79, 70, 229, 0.1);
+  
+  /* Smooth Transition */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover State (Mouse over) */
+.button:hover {
+  background: linear-gradient(135deg, #f68929 0%, #4338ca 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3), 0 4px 6px -2px rgba(79, 70, 229, 0.15);
+}
+
+/* Active State (Button is clicked) */
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px 0 rgba(79, 70, 229, 0.2);
+}
+
+/* Focus State (Keyboard navigation/Accessibility) */
+.button:focus-visible {
+  outline: 3px solid #c7d2fe;
+  outline-offset: 2px;
+}
+        </style>
     </head>
 
     <body>
         <form id="upload-form">
-            <input type="file" id="file-input" >
-            <button type="submit"> Upload </button>
+            <input type="file" id="file-input" class="button">
+            <button type="submit"  class="button"> Upload </button>
         </form>
     </body>
+
+    <script>
+
+                const express = require("express");
+        const app = express();
+
+        app.use(express.static("public"));
+        const file = document.getElementById("fileInput").files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/upload", {
+        method: "POST",
+        body: formData
+    });
+
+    const result = await response.text();
+    console.log(result); 
+
+      
+</script>
+    </script>
 </html>
